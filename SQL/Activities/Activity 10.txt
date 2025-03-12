@@ -1,0 +1,38 @@
+-- 1. Find all the orders issued against the salesman who works for the customer whose ID is 3007
+SELECT * 
+FROM orders o
+WHERE o.salesman_id = (
+    SELECT c.salesman_id 
+    FROM customers c 
+    WHERE c.customer_id = 3007
+);
+
+-- 2. Find all orders attributed to a salesman in New York
+SELECT * 
+FROM orders o
+WHERE o.salesman_id IN (
+    SELECT s.salesman_id
+    FROM salesman s
+    WHERE s.salesman_city = 'New York'
+);
+
+-- 3. Count the customers with grades above New York's average
+SELECT COUNT(*)
+FROM customers c
+WHERE c.grade > (
+    SELECT AVG(c2.grade)
+    FROM customers c2
+    WHERE c2.city = 'New York'
+);
+
+-- 4. Extract data from the orders table for those salesman who earned the maximum commission
+SELECT * 
+FROM orders o
+WHERE o.salesman_id IN (
+    SELECT s.salesman_id 
+    FROM salesman s
+    WHERE s.commission = (
+        SELECT MAX(s2.commission)
+        FROM salesman s2
+    )
+);
