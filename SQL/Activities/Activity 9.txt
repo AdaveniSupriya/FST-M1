@@ -1,0 +1,24 @@
+
+-- 1. Which salesman are working for which customer
+SELECT c.customer_id, c.customer_name, c.city AS customer_city, s.salesman_id, s.salesman_name, s.salesman_city AS salesman_city
+FROM customers c
+JOIN salesman s ON c.salesman_id = s.salesman_id;
+
+-- 2. List of customers with a salesman who has a grade less than 300, sorted by customer name in ascending order
+SELECT c.customer_id, c.customer_name, c.city AS customer_city, s.salesman_id, s.salesman_name
+FROM customers c
+JOIN salesman s ON c.salesman_id = s.salesman_id
+WHERE s.grade < 300
+ORDER BY c.customer_name ASC;
+
+-- 3. List of customers who appointed a salesman with a commission greater than 12%
+SELECT c.customer_id, c.customer_name, s.salesman_id, s.salesman_name, s.commission
+FROM customers c
+JOIN salesman s ON c.salesman_id = s.salesman_id
+WHERE s.commission > 12;
+
+-- 4. Order details with customer and salesman information
+SELECT o.order_no, o.order_date, o.purchase_amount, c.customer_name, c.salesman_id, s.salesman_name, s.commission
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN salesman s ON c.salesman_id = s.salesman_id;
