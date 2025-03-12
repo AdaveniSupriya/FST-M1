@@ -1,0 +1,22 @@
+-- Query 1: Salesman and customers with more than one order, sorted alphabetically
+SELECT s.salesman_name, c.customer_name, COUNT(o.order_no) AS order_count
+FROM orders o
+JOIN salesman s ON o.salesman_id = s.salesman_id
+JOIN customers c ON o.customer_id = c.customer_id
+GROUP BY s.salesman_name, c.customer_name
+HAVING COUNT(o.order_no) > 1
+ORDER BY s.salesman_name, c.customer_name;
+
+-- Query 2: Report on salesman with largest and smallest orders for each date
+SELECT 
+    o.order_date,
+    o.salesman_id,
+    o.order_no,
+    o.purchase_amount,
+    CASE 
+        WHEN o.purchase_amount = (SELECT MAX(o2.purchase_amount) FROM orders o2 WHERE o2.order_date = o.order_date) THEN 'Highest on'
+        WHEN o.purchase_amount = (SELECT MIN(o2.purchase_amount) FROM orders o2 WHERE o2.order_date = o.order_date) THEN 'Lowest on'
+        ELSE 'N/A' 
+    END AS order_type
+FROM orders o
+ORDER BY o.order_date, o.purchase_amount DESC;
