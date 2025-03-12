@@ -1,0 +1,81 @@
+Activity:1
+
+CREATE TABLE salesman (
+    salesman_id INT PRIMARY KEY,
+    salesman_name VARCHAR2(20),
+    salesman_city VARCHAR2(20),
+    commission INT
+);
+DESCRIBE salesman;
+
+Activity:2
+
+-- Insert values into the salesman table
+INSERT INTO salesman (salesman_id, salesman_name, salesman_city, commission)
+VALUES (5001, 'James Hoog', 'New York', 15);
+
+INSERT INTO salesman (salesman_id, salesman_name, salesman_city, commission)
+VALUES (5002, 'Nail Knite', 'Paris', 13);
+
+INSERT INTO salesman (salesman_id, salesman_name, salesman_city, commission)
+VALUES (5005, 'Pit Alex', 'London', 11);
+
+INSERT INTO salesman (salesman_id, salesman_name, salesman_city, commission)
+VALUES (5006, 'McLyon', 'Paris', 14);
+
+INSERT INTO salesman (salesman_id, salesman_name, salesman_city, commission)
+VALUES (5007, 'Paul Adam', 'Rome', 13);
+
+INSERT INTO salesman (salesman_id, salesman_name, salesman_city, commission)
+VALUES (5003, 'Lauson Hen', 'San Jose', 12);
+
+-- View all data in the salesman table
+SELECT * FROM salesman;
+
+
+Activity:3
+
+SELECT salesman_id, salesman_city
+FROM salesman;
+
+-- Show data of salesman from Paris
+SELECT *
+FROM salesman
+WHERE salesman_city = 'Paris';
+
+-- Show salesman_id and commission of Paul Adam
+SELECT salesman_id, commission
+FROM salesman
+WHERE salesman_name = 'Paul Adam';
+
+Activity:4
+
+ALTER TABLE salesman
+ADD grade INT;
+
+-- Set the value of "grade" to 100 for all records
+UPDATE salesman
+SET grade = 100;
+
+-- View the updated data in the salesman table
+SELECT * FROM salesman;
+
+Activity5:
+
+-- Update grade to 200 for salesmen from Rome
+UPDATE salesman
+SET grade = 200
+WHERE salesman_city = 'Rome';
+
+-- Update grade to 300 for James Hoog
+UPDATE salesman
+SET grade = 300
+WHERE salesman_name = 'James Hoog';
+
+-- Change the name 'McLyon' to 'Pierre'
+UPDATE salesman
+SET salesman_name = 'Pierre'
+WHERE salesman_name = 'McLyon';
+
+-- View the updated data
+SELECT * FROM salesman;
